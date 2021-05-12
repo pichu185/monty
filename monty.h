@@ -34,4 +34,8 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+int validator(char *op_code, char *op_int, size_t l_count);
+void push_f(stack_t **stack, size_t l_count, int value);
+void pall_f(stack_t **stack, size_t l_count);
+
 #endif

@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	  continue;
 	}
       op_int = strtok(NULL, " \t");
-      validator(op_code, op_int, l_count); //si el token es un string cualquiera, preguntar si es el nombre de un opcode valido. Si no es, return -1
+      validator(op_code, op_int, l_count);
       l_count++;
     }
 }
@@ -36,14 +36,20 @@ int main(int argc, char *argv[])
 int validator(char *op_code, char *op_int, size_t l_count)
 {
   instruction_t valid[] = {{"push", push_f}, {"pall", pall_f}, {NULL, NULL}};
-  int i;
-  stack_t **stack;
+  int i, value;
+  stack_t **stack = NULL;
 
   for (i = 0; valid[i].opcode != NULL; i++)
     {
       if (strcmp(op_code, "push") == 0)
 	{
-	  valid[i].f(&stack, l_count, op_int);
+	  value = atoi(op_int);
+	  if (value == 0 && (strcmp(value, "0") != 0))
+	    {
+	      fprintf(stderr, "L%i: usage: push integer", l_count);
+	      exit(EXIT_FAILURE);
+	    }
+	  valid[i].f(&stack, l_count, value);
 	  return (1);
         }
       if (strcmp(opcode, valid[i].opcode) == 0)
@@ -56,11 +62,11 @@ int validator(char *op_code, char *op_int, size_t l_count)
   exit(EXIT_FAILURE);
 }
 
-void push_f(stack_t **stack, l_count, op_int)
+void push_f(stack_t **stack, size_t l_count, int value)
 {
   stack_t *new = NULL;
-  int value;
 
+  l_count = l_count;
   new = malloc(sizeof(stack_t));
   if (!new)
     {
@@ -73,10 +79,22 @@ void push_f(stack_t **stack, l_count, op_int)
       free(*stack);
       exit(EXIT_FAILURE);
     }
-  new->n = n;
+  new->n = value;
   new->prev = NULL;
   new->next = *stack;
   if (*stack)
     (*stack)->prev = new;
   *stack = new;
+}
+
+void pall_f(stack_t **stack, size_t l_count)
+{
+  stack_t *aux;
+
+  aux = *stack;
+  while (aux != NULL)
+    {
+      fprintf(stdin, "%i", aux->n);
+      aux = aux->next;
+    }
 }

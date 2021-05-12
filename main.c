@@ -3,7 +3,8 @@
 int main(int argc, char *argv[])
 {
   FILE *file;
-  size_t len = 0, l_count = 1;
+  size_t len = 0;
+  unsigned int l_count = 1;
   char *buff = NULL;
   ssize_t eof = 0;
   char *op_code, *op_int;
@@ -21,50 +22,55 @@ int main(int argc, char *argv[])
     }
   while ((eof = getline(&buff, &len, file)) != -1)
     {
-      op_code = strtok(buff, " \t");
-      if (op_code == "\n")
+      op_code = strtok(buff, " \t\n");
+      if (op_code == NULL)
 	{
 	  l_count++;
 	  continue;
 	}
-      op_int = strtok(NULL, " \t");
+      op_int = strtok(NULL, " \t\n");
       validator(op_code, op_int, l_count);
       l_count++;
     }
 }
 
-int validator(char *op_code, char *op_int, size_t l_count)
+int validator(char *op_code, char *op_int, unsigned int l_count)
 {
-  instruction_t valid[] = {{"push", push_f}, {"pall", pall_f}, {NULL, NULL}};
+  instruction_t valid[] = {
+    {"push", push_f}, 
+    {"pall", pall_f}, 
+    {NULL, NULL}
+  };
   int i, value;
-  stack_t **stack = NULL;
+  stack_t *stack;
 
   for (i = 0; valid[i].opcode != NULL; i++)
     {
       if (strcmp(op_code, "push") == 0)
 	{
 	  value = atoi(op_int);
-	  if (value == 0 && (strcmp(value, "0") != 0))
+	  if (value == 0 && (strcmp(op_int, "0") != 0))
 	    {
-	      fprintf(stderr, "L%i: usage: push integer", l_count);
+	      fprintf(stderr, "L%u: usage: push integer", l_count);
 	      exit(EXIT_FAILURE);
 	    }
-	  valid[i].f(&stack, l_count, value);
-	  return (1);
+	  valid[i].f(&stack, l_count);
+	  return (0);
         }
-      if (strcmp(opcode, valid[i].opcode) == 0)
+      if (strcmp(op_code, valid[i].opcode) == 0)
 	{
 	  valid[i].f(&stack, l_count);
-	  return (1)
+	  return (0);
 	}
     }
-  fprintf(stderr, "L%i: unknown instruction %s", l_count, op_code);
+  fprintf(stderr, "L%u: unknown instruction %s", l_count, op_code);
   exit(EXIT_FAILURE);
 }
 
-void push_f(stack_t **stack, size_t l_count, int value)
+void push_f(stack_t **stack, unsigned int l_count)
 {
   stack_t *new = NULL;
+  int value = 2;
 
   l_count = l_count;
   new = malloc(sizeof(stack_t));
@@ -87,7 +93,7 @@ void push_f(stack_t **stack, size_t l_count, int value)
   *stack = new;
 }
 
-void pall_f(stack_t **stack, size_t l_count)
+void pall_f(stack_t **stack, unsigned int l_count)
 {
   stack_t *aux;
 

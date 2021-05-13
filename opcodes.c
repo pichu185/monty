@@ -55,3 +55,33 @@ void nop_f(stack_t **stack, unsigned int l_count)
 	(void)stack;
 	(void)l_count;
 }
+
+/**
+ * swap_f - entry point
+ * @stack: the opcode
+ * @l_count: function to handle the opcode
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+void swap_f(stack_t **stack, unsigned int l_count)
+{
+	stack_t *aux;
+	int i = 0, temp;
+
+	aux = *stack;
+	while (aux)
+	{
+		i++;
+		aux = aux->next;
+	}
+	if (i < 2)
+	{
+		fprintf(stderr, "L%i: can't swap, stack too short\n", l_count);
+		free_and_close(&(ext.stack), ext.buff);
+		exit(EXIT_FAILURE);
+	}
+	aux = (*stack)->next;
+	temp = (*stack)->n;
+	(*stack)->n = aux->n;
+	aux->n = temp;
+}

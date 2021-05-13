@@ -35,6 +35,8 @@ void rotl_f(stack_t **stack, unsigned int l_count)
 	stack_t *aux;
 	int temp;
 
+	if (*stack == NULL)
+		return;
 	l_count = l_count;
 	aux = *stack;
 	temp = aux->n;
@@ -58,6 +60,8 @@ void rotr_f(stack_t **stack, unsigned int l_count)
 	stack_t *aux;
 	int temp;
 
+	if (*stack == NULL)
+                return;
 	l_count = l_count;
 	aux = *stack;
 	while (aux->next != NULL)

@@ -27,7 +27,6 @@ int main(int argc, char *argv[])
 	if (ext.file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		fclose(ext.file);
 		exit(EXIT_FAILURE);
 	}
 	while ((eof = getline(&buff, &len, ext.file)) != -1)
@@ -64,17 +63,16 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 	{
 		if (strcmp(op_code, "push") == 0)
 		{
-			if (valid_int(op_int) == 1)
-			{
-				ext.value = atoi(op_int);
-			}
-			else
-			{
-				fprintf(stderr, "L%u: usage: push integer\n", l_count);
-				fclose(ext.file);
-				exit(EXIT_FAILURE);
-			}
-			if (ext.value == 0 && (strcmp(op_int, "0") != 0))
+		        if (!op_int)
+		        {
+		                fprintf(stderr, "L%u: usage: push integer\n", l_count);
+		                fclose(ext.file);
+		                exit(EXIT_FAILURE);
+		        }
+		        if (strcmp(op_int, "-0") == 0)
+		                op_int = "0";
+		        ext.value = atoi(op_int);
+			if ((ext.value == 0 && (strcmp(op_int, "0") != 0)) || valid_int(op_int) == 0)
 			{
 				fprintf(stderr, "L%u: usage: push integer\n", l_count);
 				fclose(ext.file);
@@ -150,7 +148,7 @@ void pall_f(stack_t **stack, unsigned int l_count)
 
 /**
  * valid_int - entry point
- * @op_int: the opcode  
+ * @op_int: the opcode
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO Holberton project
  */

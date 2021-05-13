@@ -72,5 +72,6 @@ void mul_f(stack_t **stack, unsigned int l_count);
 void mod_f(stack_t **stack, unsigned int l_count);
 void pchar_f(stack_t **stack, unsigned int l_count);
 void pstr_f(stack_t **stack, unsigned int l_count);
+void rotl_f(stack_t **stack, unsigned int l_count);
 
 #endif

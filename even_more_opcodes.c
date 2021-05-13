@@ -61,7 +61,7 @@ void rotr_f(stack_t **stack, unsigned int l_count)
 	int temp;
 
 	if (*stack == NULL)
-                return;
+		return;
 	l_count = l_count;
 	aux = *stack;
 	while (aux->next != NULL)

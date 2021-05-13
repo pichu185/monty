@@ -118,7 +118,7 @@ void mod_f(stack_t **stack, unsigned int l_count)
 	}
 	if (i < 2)
 	{
-		fprintf(stderr, "L%i: can't div, stack too short\n", l_count);
+		fprintf(stderr, "L%i: can't mod, stack too short\n", l_count);
 		free_and_close(&(ext.stack), ext.buff);
 		exit(EXIT_FAILURE);
 	}

@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
  */
 int validator(char *op_code, char *op_int, unsigned int l_count)
 {
-	instruction_t valid[] = {{"push", push_f}, {"pall", pall_f},
+	instruction_t valid[] = {{"push", push_f}, {"pall", pall_f}, {"pint", pint_f},
 				 {NULL, NULL}};
 	int i;
 

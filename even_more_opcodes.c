@@ -35,6 +35,11 @@ void rotl_f(stack_t **stack, unsigned int l_count)
 	stack_t *aux;
 	int temp;
 
+	if (*stack == NULL)
+	{
+		free_and_close(&(ext.stack), ext.buff);
+		exit(EXIT_FAILURE);
+	}
 	l_count = l_count;
 	aux = *stack;
 	temp = aux->n;

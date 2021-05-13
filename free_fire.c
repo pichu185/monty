@@ -1,13 +1,13 @@
 #include "monty.h"
 
 /**
- * free_a - entry point
+ * free_and_close - entry point
  * @stack: the opcode
  * @buff: kkkk
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO Holberton project
  */
-void free_a(stack_t **stack, char *buff)
+void free_and_close(stack_t **stack, char *buff)
 {
 	stack_t *fire;
 
@@ -18,4 +18,5 @@ void free_a(stack_t **stack, char *buff)
 		*stack = (*stack)->next;
 		free(fire);
 	}
+	fclose(ext.file);
 }

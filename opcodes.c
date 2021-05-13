@@ -12,8 +12,7 @@ void pint_f(stack_t **stack, unsigned int l_count)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%i: can't pint, stack empty\n", l_count);
-		free_a(&(ext.stack), ext.buff);
-		fclose(ext.file);
+		free_and_close(&(ext.stack), ext.buff);
 		exit(EXIT_FAILURE);
 	}
 	printf("%i\n", (*stack)->n);
@@ -33,8 +32,7 @@ void pop_f(stack_t **stack, unsigned int l_count)
   if (*stack == NULL)
     {
       fprintf(stderr, "L%i: can't pop an empty stack\n", l_count);
-      free_a(&(ext.stack), ext.buff);
-      fclose(ext.file);
+      free_and_close(&(ext.stack), ext.buff);
       exit(EXIT_FAILURE);
     }
   aux = (ext.stack);

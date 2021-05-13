@@ -12,12 +12,14 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
+		fclose(ext.file);
 		exit(EXIT_FAILURE);
 	}
 	ext.file = fopen(argv[1], "r");
 	if (ext.file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		fclose(ext.file);
 		exit(EXIT_FAILURE);
 	}
 	while ((eof = getline(&buff, &len, ext.file)) != -1)
@@ -38,7 +40,8 @@ int main(int argc, char *argv[])
 
 int validator(char *op_code, char *op_int, unsigned int l_count)
 {
-	instruction_t valid[] = {{"push", push_f}, {"pall", pall_f}, {NULL, NULL}};
+	instruction_t valid[] = {{"push", push_f}, {"pall", pall_f},
+				 {NULL, NULL}};
 	int i;
 
 	for (i = 0; valid[i].opcode != NULL; i++)
@@ -52,11 +55,13 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 			else
 			{
 				fprintf(stderr, "L%u: usage: push integer\n", l_count);
+				fclose(ext.file);
 				exit(EXIT_FAILURE);
 			}
 			if (ext.value == 0 && (strcmp(op_int, "0") != 0))
 			{
 				fprintf(stderr, "L%u: usage: push integer\n", l_count);
+				fclose(ext.file);
 				exit(EXIT_FAILURE);
 			}
 			valid[i].f(&(ext.stack), l_count);
@@ -69,6 +74,7 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 		}
 	}
 	fprintf(stderr, "L%u: unknown instruction %s\n", l_count, op_code);
+	fclose(ext.file);
 	exit(EXIT_FAILURE);
 }
 
@@ -82,11 +88,13 @@ void push_f(stack_t **stack, unsigned int l_count)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free(ext.stack);
+		fclose(ext.file);
 		exit(EXIT_FAILURE);
 	}
 	if (!stack)
 	{
 		free(ext.stack);
+		fclose(ext.file);
 		exit(EXIT_FAILURE);
 	}
 	new->n = ext.value;

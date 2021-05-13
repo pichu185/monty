@@ -41,6 +41,7 @@ typedef struct instruction_s
  * @value: the opcode
  * @stack: function to handle the opcode
  * @file: jjj
+ * @buff: sdahsd
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO Holberton project
  */
@@ -49,7 +50,7 @@ typedef struct externs_s
 	int value;
 	stack_t *stack;
 	FILE *file;
-        char *buff;
+	char *buff;
 } externs_t;
 
 extern externs_t ext;
@@ -57,7 +58,7 @@ extern externs_t ext;
 int validator(char *op_code, char *op_int, unsigned int l_count);
 void push_f(stack_t **stack, unsigned int l_count);
 void pall_f(stack_t **stack, unsigned int l_count);
-int valid_int(char *op_int);
+int is_int(char *op_int);
 void free_a(stack_t **stack, char *buff);
 
 #endif

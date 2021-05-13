@@ -63,17 +63,17 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 	{
 		if (strcmp(op_code, "push") == 0)
 		{
-		        if (!op_int)
-		        {
-		                fprintf(stderr, "L%u: usage: push integer\n", l_count);
-		                fclose(ext.file);
+			if (!op_int)
+			{
+				fprintf(stderr, "L%u: usage: push integer\n", l_count);
+				fclose(ext.file);
 				free_a(&(ext.stack), ext.buff);
-		                exit(EXIT_FAILURE);
-		        }
-		        if (strcmp(op_int, "-0") == 0)
-		                op_int = "0";
-		        ext.value = atoi(op_int);
-			if ((ext.value == 0 && (strcmp(op_int, "0") != 0)) || valid_int(op_int) == 0)
+				exit(EXIT_FAILURE);
+			}
+			if (strcmp(op_int, "-0") == 0)
+				op_int = "0";
+			ext.value = atoi(op_int);
+			if ((ext.value == 0 && (strcmp(op_int, "0") != 0)) || is_int(op_int) == 0)
 			{
 				fprintf(stderr, "L%u: usage: push integer\n", l_count);
 				fclose(ext.file);
@@ -117,7 +117,7 @@ void push_f(stack_t **stack, unsigned int l_count)
 	}
 	if (!stack)
 	{
-	        free_a(&(ext.stack), ext.buff);
+		free_a(&(ext.stack), ext.buff);
 		fclose(ext.file);
 		exit(EXIT_FAILURE);
 	}
@@ -155,7 +155,7 @@ void pall_f(stack_t **stack, unsigned int l_count)
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO Holberton project
  */
-int valid_int(char *op_int)
+int is_int(char *op_int)
 {
 	int i = 0;
 

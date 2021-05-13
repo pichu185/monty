@@ -52,6 +52,8 @@ void pop_f(stack_t **stack, unsigned int l_count)
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO Holberton project
  */
-void nop_f(stack_t **stack __attribute__((unused)), unsigned int l_count __attribute__((unused)))
+void nop_f(stack_t **stack, unsigned int l_count)
 {
+  *stack = *stack;
+  l_count = l_count;
 }

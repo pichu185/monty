@@ -156,6 +156,6 @@ void pchar_f(stack_t **stack, unsigned int l_count)
                 free_and_close(&(ext.stack), ext.buff);
                 exit(EXIT_FAILURE);
         }
-	putchar((*stack)->n);
-	putchar('\n');
+	_putchar((*stack)->n);
+	_putchar('\n');
 }

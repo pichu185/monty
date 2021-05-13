@@ -153,8 +153,8 @@ void pchar_f(stack_t **stack, unsigned int l_count)
 	if (!isascii((ext.stack->n)))
 	{
 		fprintf(stderr, "L%i: can't pchar, value out of range\n", l_count);
-                free_and_close(&(ext.stack), ext.buff);
-                exit(EXIT_FAILURE);
-        }
+		free_and_close(&(ext.stack), ext.buff);
+		exit(EXIT_FAILURE);
+	}
 	printf("%c\n", (ext.stack)->n);
 }

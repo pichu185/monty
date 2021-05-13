@@ -58,7 +58,7 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 				 {"pop", pop_f}, {"nop", nop_f}, {"swap", swap_f}, {"add", add_f},
 				 {"mul", mul_f}, {"div", div_f}, {"sub", sub_f}, {"mod", mod_f},
 				 {"pchar", pchar_f}, {"pstr", pstr_f}, {"rotl", rotl_f},
-				 {NULL, NULL}};
+				 {"rotr", rotr_f}, {NULL, NULL}};
 	int i;
 
 	for (i = 0; valid[i].opcode != NULL; i++)

@@ -14,6 +14,7 @@ void pint_f(stack_t **stack, unsigned int l_count)
 		printf("L%i: can't pint, stack empty\n", l_count);
 		free_a(&(ext.stack), ext.buff);
 		fclose(ext.file);
+		exit(EXIT_FAILURE);
 	}
 	printf("%i\n", (*stack)->n);
 }

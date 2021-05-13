@@ -53,7 +53,6 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 	      fprintf(stderr, "L%u: usage: push integer\n", l_count);
 	      exit(EXIT_FAILURE);
 	    }
-	  printf("%s ----- %i\n", op_int, ext.value);
 	  if (ext.value == 0 && (strcmp(op_int, "0") != 0))
 	    {
 	      fprintf(stderr, "L%u: usage: push integer\n", l_count);
@@ -64,12 +63,11 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
         }
       if (strcmp(op_code, valid[i].opcode) == 0)
 	{
-	  printf("identifica pall\n");
 	  valid[i].f(&(ext.stack), l_count);
 	  return (0);
 	}
     }
-  fprintf(stderr, "L%u: unknown instruction %s", l_count, op_code);
+  fprintf(stderr, "L%u: unknown instruction %s\n", l_count, op_code);
   exit(EXIT_FAILURE);
 }
 
@@ -81,7 +79,7 @@ void push_f(stack_t **stack, unsigned int l_count)
   new = malloc(sizeof(stack_t));
   if (!new)
     {
-      fprintf(stderr, "Error: malloc failed");
+      fprintf(stderr, "Error: malloc failed\n");
       free(ext.stack);
       exit(EXIT_FAILURE);
     }
@@ -90,7 +88,6 @@ void push_f(stack_t **stack, unsigned int l_count)
       free(ext.stack);
       exit(EXIT_FAILURE);
     }
-  printf("valor: %i antes de insertar al nodo  \n", ext.value);
   new->n = ext.value;
   new->prev = NULL;
   new->next = ext.stack;
@@ -117,7 +114,6 @@ void pall_f(stack_t **stack, unsigned int l_count)
       printf("%i\n", aux->n);
       aux = aux->next;
     }
-  printf("termina de recorrer lista\n");
 }
 
 int valid_int(char *op_int)

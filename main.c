@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
       validator(op_code, op_int, l_count);
       l_count++;
     }
+  fclose(ext.file);
+  return (0);
 }
 
 int validator(char *op_code, char *op_int, unsigned int l_count)
@@ -94,21 +96,14 @@ void push_f(stack_t **stack, unsigned int l_count)
   if (ext.stack)
     (ext.stack)->prev = new;
   ext.stack = new;
-  /*
-  aux = *stack;
-  while (aux)
-    {
-      printf("%i (valores de la lista)\n", aux->n);
-      aux = aux->next;
-    }
-  */
 }
 
 void pall_f(stack_t **stack, unsigned int l_count)
 {
   stack_t *aux;
 
-  aux = ext.stack;
+  l_count = l_count;
+  aux = *stack;
   while (aux != NULL)
     {
       printf("%i\n", aux->n);

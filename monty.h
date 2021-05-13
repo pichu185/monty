@@ -61,5 +61,6 @@ void pall_f(stack_t **stack, unsigned int l_count);
 int is_int(char *op_int);
 void free_a(stack_t **stack, char *buff);
 void pint_f(stack_t **stack, unsigned int l_count);
+void pop_f(stack_t **stack, unsigned int l_count);
 
 #endif

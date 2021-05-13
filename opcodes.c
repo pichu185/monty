@@ -18,3 +18,29 @@ void pint_f(stack_t **stack, unsigned int l_count)
 	}
 	printf("%i\n", (*stack)->n);
 }
+
+/**
+ * pop_f - entry point
+ * @stack: the opcode
+ * @l_count: function to handle the opcode
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+void pop_f(stack_t **stack, unsigned int l_count)
+{
+  stack_t *aux;
+
+  if (*stack == NULL)
+    {
+      fprintf(stderr, "L%i: can't pop an empty stack\n", l_count);
+      free_a(&(ext.stack), ext.buff);
+      fclose(ext.file);
+      exit(EXIT_FAILURE);
+    }
+  aux = (ext.stack);
+  aux = aux->next;
+  if (aux != NULL)
+    aux->prev = NULL;
+  free(ext.stack);
+  ext.stack = aux;
+}

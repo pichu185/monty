@@ -68,5 +68,6 @@ void add_f(stack_t **stack, unsigned int l_count);
 void sub_f(stack_t **stack, unsigned int l_count);
 void div_f(stack_t **stack, unsigned int l_count);
 void mul_f(stack_t **stack, unsigned int l_count);
+void mod_f(stack_t **stack, unsigned int l_count);
 
 #endif

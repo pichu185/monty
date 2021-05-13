@@ -150,12 +150,11 @@ void pchar_f(stack_t **stack, unsigned int l_count)
 		free_and_close(&(ext.stack), ext.buff);
 		exit(EXIT_FAILURE);
 	}
-	if ((*stack)->n < 0 && (*stack)->n > 255)
+	if (((ext.stack)->n < 0) || ((ext.stack)->n > 255))
 	{
 		fprintf(stderr, "L%i: can't pchar, value out of range\n", l_count);
                 free_and_close(&(ext.stack), ext.buff);
                 exit(EXIT_FAILURE);
         }
-	_putchar((*stack)->n);
-	_putchar('\n');
+	printf("%c\n", (ext.stack)->n);
 }

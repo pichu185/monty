@@ -27,20 +27,20 @@ void pint_f(stack_t **stack, unsigned int l_count)
  */
 void pop_f(stack_t **stack, unsigned int l_count)
 {
-  stack_t *aux;
+	stack_t *aux;
 
-  if (*stack == NULL)
-    {
-      fprintf(stderr, "L%i: can't pop an empty stack\n", l_count);
-      free_and_close(&(ext.stack), ext.buff);
-      exit(EXIT_FAILURE);
-    }
-  aux = (ext.stack);
-  aux = aux->next;
-  if (aux != NULL)
-    aux->prev = NULL;
-  free(ext.stack);
-  ext.stack = aux;
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%i: can't pop an empty stack\n", l_count);
+		free_and_close(&(ext.stack), ext.buff);
+		exit(EXIT_FAILURE);
+	}
+	aux = (ext.stack);
+	aux = aux->next;
+	if (aux != NULL)
+		aux->prev = NULL;
+	free(ext.stack);
+	ext.stack = aux;
 }
 
 /**
@@ -52,6 +52,6 @@ void pop_f(stack_t **stack, unsigned int l_count)
  */
 void nop_f(stack_t **stack, unsigned int l_count)
 {
-  (void)stack;
-  (void)l_count;
+	(void)stack;
+	(void)l_count;
 }

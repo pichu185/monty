@@ -7,7 +7,7 @@ externs_t ext;
  * @argc: the opcode
  * @argv: function to handle the opcode
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO Holberton project
+ * Return: 0 on succes 1 on failure
  */
 int main(int argc, char *argv[])
 {
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
  * @op_int: kkkk
  * @l_count: function to handle the opcode
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO Holberton project
+ * Return: for stack, queues, LIFO, FIFO Holberton project
  */
 int validator(char *op_code, char *op_int, unsigned int l_count)
 {
@@ -150,10 +150,10 @@ void pall_f(stack_t **stack, unsigned int l_count)
 }
 
 /**
- * valid_int - entry point
+ * is_int - entry point
  * @op_int: the opcode
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO Holberton project
+ * Return: for stack, queues, LIFO, FIFO Holberton project
  */
 int is_int(char *op_int)
 {

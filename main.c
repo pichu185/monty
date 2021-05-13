@@ -1,6 +1,14 @@
 #include "monty.h"
+
 externs_t ext;
 
+/**
+ * main - entry point
+ * @argc: the opcode
+ * @argv: function to handle the opcode
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
 int main(int argc, char *argv[])
 {
 	size_t len = 0;
@@ -38,6 +46,14 @@ int main(int argc, char *argv[])
 	return (0);
 }
 
+/**
+ * validator - entry point
+ * @op_code: the opcode
+ * @op_int: kkkk
+ * @l_count: function to handle the opcode
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
 int validator(char *op_code, char *op_int, unsigned int l_count)
 {
 	instruction_t valid[] = {{"push", push_f}, {"pall", pall_f},
@@ -78,6 +94,13 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 	exit(EXIT_FAILURE);
 }
 
+/**
+ * push_f - entry point
+ * @stack: the opcode
+ * @l_count: function to handle the opcode
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
 void push_f(stack_t **stack, unsigned int l_count)
 {
 	stack_t *new = NULL;
@@ -105,6 +128,13 @@ void push_f(stack_t **stack, unsigned int l_count)
 	ext.stack = new;
 }
 
+/**
+ * pall_f - entry point
+ * @stack: the opcode
+ * @l_count: function to handle the opcode
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
 void pall_f(stack_t **stack, unsigned int l_count)
 {
 	stack_t *aux;
@@ -118,6 +148,12 @@ void pall_f(stack_t **stack, unsigned int l_count)
 	}
 }
 
+/**
+ * valid_int - entry point
+ * @op_int: the opcode  
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
 int valid_int(char *op_int)
 {
 	int i = 0;

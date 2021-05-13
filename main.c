@@ -56,7 +56,7 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 {
 	instruction_t valid[] = {{"push", push_f}, {"pall", pall_f}, {"pint", pint_f},
 				 {"pop", pop_f}, {"nop", nop_f}, {"swap", swap_f}, {"add", add_f},
-				 {"sub", sub_f}, {NULL, NULL}};
+				 {"div", div_f}, {"sub", sub_f}, {NULL, NULL}};
 	int i;
 
 	for (i = 0; valid[i].opcode != NULL; i++)

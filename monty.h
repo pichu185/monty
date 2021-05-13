@@ -65,5 +65,6 @@ void pop_f(stack_t **stack, unsigned int l_count);
 void nop_f(stack_t **stack, unsigned int l_count);
 void swap_f(stack_t **stack, unsigned int l_count);
 void add_f(stack_t **stack, unsigned int l_count);
+void sub_f(stack_t **stack, unsigned int l_count);
 
 #endif

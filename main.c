@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
 {
 	size_t len = 0;
 	unsigned int l_count = 1;
-	char *buff = NULL;
 	ssize_t eof = 0;
 	char *op_code, *op_int;
 
@@ -28,9 +27,10 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while ((eof = getline(&buff, &len, ext.file)) != -1)
+	ext.buff = NULL;
+	while ((eof = getline(&(ext.buff), &len, ext.file)) != -1)
 	{
-		op_code = strtok(buff, " \t\n");
+		op_code = strtok(ext.buff, " \t\n");
 		if (op_code == NULL)
 		{
 			l_count++;
@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 		validator(op_code, op_int, l_count);
 		l_count++;
 	}
+	free_a(&(ext.stack), ext.buff);
 	fclose(ext.file);
 	return (0);
 }
@@ -66,6 +67,7 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 		        {
 		                fprintf(stderr, "L%u: usage: push integer\n", l_count);
 		                fclose(ext.file);
+				free_a(&(ext.stack), ext.buff);
 		                exit(EXIT_FAILURE);
 		        }
 		        if (strcmp(op_int, "-0") == 0)
@@ -75,6 +77,7 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 			{
 				fprintf(stderr, "L%u: usage: push integer\n", l_count);
 				fclose(ext.file);
+				free_a(&(ext.stack), ext.buff);
 				exit(EXIT_FAILURE);
 			}
 			valid[i].f(&(ext.stack), l_count);
@@ -88,6 +91,7 @@ int validator(char *op_code, char *op_int, unsigned int l_count)
 	}
 	fprintf(stderr, "L%u: unknown instruction %s\n", l_count, op_code);
 	fclose(ext.file);
+	free_a(&(ext.stack), ext.buff);
 	exit(EXIT_FAILURE);
 }
 
@@ -107,13 +111,13 @@ void push_f(stack_t **stack, unsigned int l_count)
 	if (!new)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free(ext.stack);
+		free_a(&(ext.stack), ext.buff);
 		fclose(ext.file);
 		exit(EXIT_FAILURE);
 	}
 	if (!stack)
 	{
-		free(ext.stack);
+	        free_a(&(ext.stack), ext.buff);
 		fclose(ext.file);
 		exit(EXIT_FAILURE);
 	}

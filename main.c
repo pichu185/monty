@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	while ((eof = getline(&(ext.buff), &len, ext.file)) != -1)
 	{
 		op_code = strtok(ext.buff, " \t\n");
-		if (op_code == NULL)
+		if ((op_code == NULL) || op_code[0] == '#')
 		{
 			l_count++;
 			continue;

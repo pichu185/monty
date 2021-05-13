@@ -1,5 +1,4 @@
 #include "monty.h"
-
 externs_t ext;
 
 int main(int argc, char *argv[])
